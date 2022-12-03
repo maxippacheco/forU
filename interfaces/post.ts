@@ -7,9 +7,21 @@ export interface IPost extends Model{
 	description: string;
 	id: string;
 	image?: string;
-	// likes?: number[];
-	// dislikes?: number[];
-	comments?: any[];
+	interactions?: ILike;
+	comments?: IComment[];
 }
 
-// todo: añadir fecha
+export interface ILike{
+	liked_by: string[];
+	disliked_by: string;
+	likes: number;
+	dislikes: number;
+	post_id: string;
+}
+
+export interface IComment{
+	post_id: string;
+	user_id: string;
+	title: string;
+	description: string;
+}

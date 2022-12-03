@@ -3,9 +3,10 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, SubmitHandler  } from 'react-hook-form';
 import Modal from 'react-modal';
-import { AiOutlineCloseCircle, AiOutlineComment, AiOutlineCompress, AiOutlineDislike, AiOutlineFileAdd, AiOutlineLike, AiOutlineUserAdd, AiOutlineUsergroupAdd } from 'react-icons/ai';
+import { AiOutlineCloseCircle, AiOutlineComment, AiOutlineDislike, AiOutlineFileAdd, AiOutlineLike, AiOutlineUserAdd, AiOutlineUsergroupAdd } from 'react-icons/ai';
 import { GrFormAdd } from 'react-icons/gr';
 import { AppLayout } from '../layouts';
+import { MyTextInput } from '../components/ui';
 
 const schema = Yup.object({
   community: Yup.string().required(),
@@ -86,9 +87,12 @@ export default function Home() {
               </select>
               { errors.community && (<span className='text-red-500 mt-2'>Community is required</span>)}
 
-              <label htmlFor="title" className='text-lg my-2'>Title:</label>
-              <input { ...register('title')} className={`p-2 focus:outline-none focus:ring-1 ring-sky-500`} />
-              { errors.title && (<span className='text-red-500 mt-2'>Title is required</span>)}
+              <MyTextInput 
+                name='title'
+                label='Title:'
+                register={ register }
+                errors={ errors.title }
+              />
 
               <label htmlFor="description" className='text-lg my-2'>Description:</label>
               <textarea 
