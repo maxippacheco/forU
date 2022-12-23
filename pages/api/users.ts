@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { dbConnection } from '../../database/config';
 import { User } from '../../models';
 import { IUser } from '../../interfaces/user';
+import bcrypt from 'bcryptjs'
 
 type Data = 
   | { msg: string }
@@ -13,10 +14,7 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   
-  Promise.all([
-    await dbConnection(),
-    await User.sync(),
-  ])
+  await dbConnection()
 
   switch (req.method) {
     case "POST":
@@ -31,7 +29,7 @@ export default async function handler(
 
 export const createUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
 
-	const { username, email, password } = req.body;
+	let { username, email, password } = req.body;
 
 	if( !username || !email || !password ){
 		return res.status(400).json({
@@ -46,10 +44,15 @@ export const createUser = async(req: NextApiRequest, res: NextApiResponse<Data>)
       msg: 'Email exists'
     })
   }
+
+  const salt = bcrypt.genSaltSync();
+  password = bcrypt.hashSync( password, salt );
   
-
-
   const newUser = await User.create({ username, email, password })
+
+
+
+
 
   res.json(newUser)
 

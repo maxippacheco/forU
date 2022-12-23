@@ -1,6 +1,7 @@
 import { sequelize } from "../database";
 import { IPost } from "../interfaces";
 import { DataTypes } from 'sequelize';
+import User from './user';
 
 export const Post = sequelize.define<IPost>('post', {
 	id:{
@@ -25,3 +26,8 @@ export const Post = sequelize.define<IPost>('post', {
 	},
 
 })
+
+Post.belongsTo( User, { foreignKey: 'user_id' })
+sequelize.sync();
+
+export default Post;

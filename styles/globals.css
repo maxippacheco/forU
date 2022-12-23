@@ -14,6 +14,10 @@ a {
   box-sizing: border-box;
 }
 
+.h-home{
+  height: calc(100vh - 5rem);
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -9,7 +9,7 @@ export const Navbar = () => {
 	
 	return (
 		<header className="w-full bg-sky-600">
-			<nav className="h:20">
+			<nav className="h-20">
 				<div className="flex flex-row h-20 grow w-full justify-end">
 					<div className='w-28 h-full hidden md:flex items-center justify-center'>
 						<h1 className='text-white text-3xl'>For U</h1>

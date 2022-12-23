@@ -1,4 +1,5 @@
 import { Model } from 'sequelize';
+import { IUser } from './user';
 
 // Think about like system
 export interface IPost extends Model{
@@ -9,6 +10,17 @@ export interface IPost extends Model{
 	image?: string;
 	interactions?: ILike;
 	comments?: IComment[];
+	user: IUser;
+	forum: ICommunity;
+}
+
+export interface ICommunity extends Model{
+	id: string;
+	title: string;
+	owner: IUser;
+	users?: IUser[];
+	posts?: IPost[];
+	img?: string;
 }
 
 export interface ILike{
